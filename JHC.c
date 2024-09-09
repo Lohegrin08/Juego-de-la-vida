@@ -8,7 +8,7 @@
 void imprimirTablero(int tablero[HEIGHT][WIDTH]) {
 	for (int i = 0; i < HEIGHT; i++) {
 		for (int j = 0; j < WIDTH; j++) {
-			printf("%c ", tablero[i][j] ? 'O' : ' ');  // 'O' representa las cC)lulas vivas, ' ' las muertas
+			printf("%c ", tablero[i][j] ? 'O' : ' ');  // 'O' representa las celulas vivas, ' ' las muertas
 		}
 		printf("\n");
 	}
@@ -35,7 +35,7 @@ void actualizarTablero(int tablero[HEIGHT][WIDTH]) {
 			int vecinosVivos = contarVecinosVivos(tablero, i, j);
 			if (tablero[i][j] == 1) {  //celda viva
 				if (vecinosVivos < 2 || vecinosVivos > 3) {
-					nuevoTablero[i][j] = 0;  // Muerte por soledad o sobrepoblaciC3n
+					nuevoTablero[i][j] = 0;  // Muerte por soledad o sobrepoblacion
 				} else {
 					nuevoTablero[i][j] = 1;  // Sobrevive
 				}
@@ -56,15 +56,13 @@ void actualizarTablero(int tablero[HEIGHT][WIDTH]) {
 }
 
 void colocarLWSS(int tablero[HEIGHT][WIDTH], int x, int y) {
-    // Asegúrate de que el LWSS no salga del tablero
     if (x >= 0 && x + 5 < WIDTH && y >= 0 && y + 2 < HEIGHT) {
-        // Establecer el patrón LWSS
-        tablero[y][x] = 1;        // (y, x)
-        tablero[y][x + 1] = 1;    // (y, x+1)
-        tablero[y][x + 2] = 1;    // (y, x+2)
-        tablero[y + 1][x + 2] = 1;  // (y+1, x+2)
-        tablero[y + 2][x + 1] = 1;  // (y+2, x+1)
-        tablero[y + 2][x + 2] = 1;  // (y+2, x+2)
+        tablero[y][x] = 1;    
+        tablero[y][x + 1] = 1;    
+        tablero[y][x + 2] = 1;  
+        tablero[y + 1][x + 2] = 1;  
+        tablero[y + 2][x + 1] = 1;  
+        tablero[y + 2][x + 2] = 1; 
     } else {
         printf("Posición fuera del tablero.\n");
     }
