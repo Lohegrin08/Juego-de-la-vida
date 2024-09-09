@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>  // Para usar la funciC3n sleep()
+#include <unistd.h>  
 
 #define WIDTH 75   // Ancho del tablero
 #define HEIGHT 75  // Alto del tablero
@@ -8,7 +8,7 @@
 void imprimirTablero(int tablero[HEIGHT][WIDTH]) {
 	for (int i = 0; i < HEIGHT; i++) {
 		for (int j = 0; j < WIDTH; j++) {
-			printf("%c ", tablero[i][j] ? 'O' : ' ');  // 'O' representa las cC)lulas vivas, '.' las muertas
+			printf("%c ", tablero[i][j] ? 'O' : ' ');  // 'O' representa las cC)lulas vivas, ' ' las muertas
 		}
 		printf("\n");
 	}
@@ -25,21 +25,6 @@ int contarVecinosVivos(int tablero[HEIGHT][WIDTH], int x, int y) {
 		}
 	}
 	return vivos;
-}
-
-void colocarLWSS(int tablero[HEIGHT][WIDTH], int x, int y) {
-    // Asegúrate de que el LWSS no salga del tablero
-    if (x >= 0 && x + 5 < WIDTH && y >= 0 && y + 2 < HEIGHT) {
-        // Establecer el patrón LWSS
-        tablero[y][x] = 1;        // (y, x)
-        tablero[y][x + 1] = 1;    // (y, x+1)
-        tablero[y][x + 2] = 1;    // (y, x+2)
-        tablero[y + 1][x + 2] = 1;  // (y+1, x+2)
-        tablero[y + 2][x + 1] = 1;  // (y+2, x+1)
-        tablero[y + 2][x + 2] = 1;  // (y+2, x+2)
-    } else {
-        printf("Posición fuera del tablero.\n");
-    }
 }
 
 void actualizarTablero(int tablero[HEIGHT][WIDTH]) {
@@ -70,28 +55,43 @@ void actualizarTablero(int tablero[HEIGHT][WIDTH]) {
 	}
 }
 
+void colocarLWSS(int tablero[HEIGHT][WIDTH], int x, int y) {
+    // Asegúrate de que el LWSS no salga del tablero
+    if (x >= 0 && x + 5 < WIDTH && y >= 0 && y + 2 < HEIGHT) {
+        // Establecer el patrón LWSS
+        tablero[y][x] = 1;        // (y, x)
+        tablero[y][x + 1] = 1;    // (y, x+1)
+        tablero[y][x + 2] = 1;    // (y, x+2)
+        tablero[y + 1][x + 2] = 1;  // (y+1, x+2)
+        tablero[y + 2][x + 1] = 1;  // (y+2, x+1)
+        tablero[y + 2][x + 2] = 1;  // (y+2, x+2)
+    } else {
+        printf("Posición fuera del tablero.\n");
+    }
+}
+
 int main() {
 	int tablero[HEIGHT][WIDTH] = {0};
 
 
-	//PatrC3n ("glider")
+	//Patron ("glider")
 	tablero[1][2] = 1;
 	tablero[2][3] = 1;
 	tablero[3][1] = 1;
 	tablero[3][2] = 1;
 	tablero[3][3] = 1;
-	//PatrC3n ("Blinker")
+	//Patron ("Blinker")
 	tablero[10][8] = 1;
 	tablero[10][9] = 1;
 	tablero[10][10] = 1;
 
-	//PatrC3n ("glider")
+	//Patron ("glider")
 	tablero[21][22] = 1;
 	tablero[22][23] = 1;
 	tablero[23][21] = 1;
 	tablero[23][22] = 1;
 	tablero[23][23] = 1;
-	//PatrC3n ("glider")
+	//Patron ("glider")
 	tablero[31][32] = 1;
 	tablero[32][33] = 1;
 	tablero[33][31] = 1;
@@ -100,10 +100,10 @@ int main() {
     colocarLWSS(tablero, 45, 5);
 	
 	while (1) {
-		system("clear");  // Limpiar pantalla para una mejor visualizaciC3n
+		system("clear");  // Limpia la pantalla
 		imprimirTablero(tablero);
 		actualizarTablero(tablero);
-		usleep(200000);  // Pausa de 200 milisegundos entre generaciones
+		usleep(200000);  // Pausa de 200 milisegundos
 	}
 
 	return 0;
